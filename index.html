@@ -2,179 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semillero IPT Univalle - Timer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Semillero IPT Univalle - Physics Fight Timer</title>
   <style>
+    /* Google Font Import */
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+
+    /* Design Tokens */
     :root {
-      --primary: #D1121C;
-      --primary-hover: #b00e16;
-      --primary-light: #fde8e8;
-      --bg: #F8FAFC;
+      --bg-main: #F8FAFC;
       --card-bg: #FFFFFF;
       --text-main: #0F172A;
       --text-muted: #64748B;
-      --border: #E2E8F0;
+      --univalle-red: #D1121C;
+      --univalle-red-hover: #B00E17;
+      --univalle-red-soft: rgba(209, 18, 28, 0.08);
+      --border-color: #E2E8F0;
+      --border-focus: #CBD5E1;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
+    /* CSS Reset */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Lexend', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background-color: var(--bg);
+      background-color: var(--bg-main);
       color: var(--text-main);
+      font-family: var(--font-family);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 12px;
       align-items: center;
+      padding: 16px;
+      line-height: 1.5;
     }
 
-    .container {
+    /* App Container */
+    .app-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 640px;
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    /* Header */
+    /* Header Styling */
     header {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 14px 18px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      border: 1px solid var(--border);
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .univalle-logo {
-      width: 42px;
-      height: 42px;
+    .brand-logo {
+      width: 44px;
+      height: 52px;
       flex-shrink: 0;
     }
 
-    .header-titles h1 {
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
       font-size: 1.15rem;
       font-weight: 800;
-      color: var(--primary);
-      line-height: 1.1;
+      color: var(--univalle-red);
       letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-transform: uppercase;
     }
 
-    .header-titles p {
-      font-size: 0.75rem;
+    .header-subtitle {
+      font-size: 0.825rem;
+      font-weight: 500;
       color: var(--text-muted);
-      font-weight: 600;
+      margin-top: 2px;
     }
 
-    .top-controls {
-      display: flex;
-      gap: 6px;
-    }
-
-    .icon-btn {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px;
-      cursor: pointer;
-      color: var(--text-main);
-      font-weight: 600;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .icon-btn:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .icon-btn.muted {
-      opacity: 0.5;
-    }
-
-    /* Audio Banner */
-    #audio-banner {
-      background: var(--primary-light);
-      color: var(--primary);
-      border: 1px dashed var(--primary);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    /* Timer Main Display Card */
+    /* Main Timer Card */
     .timer-card {
       background: var(--card-bg);
-      border-radius: 20px;
-      padding: 24px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-md);
       display: flex;
       flex-direction: column;
       align-items: center;
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-      border: 1px solid var(--border);
+      text-align: center;
       position: relative;
     }
 
+    /* Audio Banner */
+    .audio-banner {
+      width: 100%;
+      background: var(--univalle-red-soft);
+      border: 1px solid rgba(209, 18, 28, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--univalle-red);
+      margin-bottom: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .audio-banner:hover {
+      background: rgba(209, 18, 28, 0.12);
+    }
+
+    /* Stage Header Info */
     .stage-badge {
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 0.8rem;
-      font-weight: 800;
+      display: inline-block;
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
       padding: 4px 12px;
-      border-radius: 20px;
-      text-transform: uppercase;
+      border-radius: 999px;
       letter-spacing: 0.05em;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
 
     .stage-title {
       font-size: 1.25rem;
-      font-weight: 800;
-      text-align: center;
+      font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 2px;
-      line-height: 1.2;
-    }
-
-    .stage-role {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    /* Ring & Digits Container */
-    .timer-ring-container {
-      position: relative;
-      width: 240px;
-      height: 240px;
+      min-height: 3rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 10px 0 20px 0;
+      max-width: 90%;
+      line-height: 1.3;
+    }
+
+    /* Ring & Timer Center Container */
+    .timer-ring-wrapper {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 480px) {
+      .timer-ring-wrapper {
+        width: 300px;
+        height: 300px;
+      }
     }
 
     .timer-ring-svg {
@@ -184,55 +185,119 @@
     }
 
     .ring-bg {
-      stroke: #f1f5f9;
+      fill: none;
+      stroke: var(--border-color);
       stroke-width: 12;
     }
 
     .ring-progress {
-      stroke: var(--primary);
+      fill: none;
+      stroke: var(--univalle-red);
       stroke-width: 12;
       stroke-linecap: round;
-      transition: stroke-dashoffset 0.3s linear, stroke 0.3s ease;
+      stroke-dasharray: 816.8; /* 2 * PI * 130 */
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
     }
 
-    .ring-progress.warning {
-      stroke: #EAB308;
-    }
-
-    .ring-progress.danger {
-      stroke: #EF4444;
-    }
-
-    .time-digits {
+    .timer-center-content {
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .countdown-digits {
       font-size: 3.5rem;
-      font-weight: 900;
+      font-weight: 800;
+      letter-spacing: -0.04em;
       color: var(--text-main);
       font-variant-numeric: tabular-nums;
-      letter-spacing: -0.03em;
+      line-height: 1;
     }
 
-    /* Controls */
-    .action-buttons {
+    @media (min-width: 480px) {
+      .countdown-digits {
+        font-size: 4rem;
+      }
+    }
+
+    .countdown-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 6px;
+    }
+
+    /* Total Progress Bar */
+    .overall-progress-box {
+      width: 100%;
+      max-width: 360px;
+      margin-bottom: 20px;
+    }
+
+    .overall-progress-labels {
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .overall-bar-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .overall-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--univalle-red);
+      transition: width 0.3s ease;
+    }
+
+    /* Control Buttons Layout */
+    .controls-grid {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .primary-controls {
+      display: flex;
+      gap: 12px;
       width: 100%;
       justify-content: center;
       align-items: center;
-      margin-bottom: 16px;
     }
 
     .btn {
-      border: none;
-      border-radius: 12px;
+      font-family: var(--font-family);
       font-weight: 700;
+      border: none;
+      border-radius: var(--radius-md);
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.15s ease;
-      font-size: 0.95rem;
+      user-select: none;
     }
 
     .btn:active {
@@ -240,120 +305,97 @@
     }
 
     .btn-main {
-      background: var(--primary);
-      color: white;
-      padding: 14px 28px;
+      flex: 2;
+      height: 54px;
+      background: var(--univalle-red);
+      color: #FFFFFF;
       font-size: 1.1rem;
-      flex: 1.5;
-      max-width: 180px;
-      box-shadow: 0 4px 12px rgba(209, 18, 28, 0.25);
+      box-shadow: 0 4px 14px rgba(209, 18, 28, 0.3);
     }
 
     .btn-main:hover {
-      background: var(--primary-hover);
+      background: var(--univalle-red-hover);
     }
 
-    .btn-secondary {
-      background: var(--bg);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      padding: 14px;
+    .btn-nav {
       flex: 1;
-      max-width: 60px;
-    }
-
-    .btn-secondary:hover {
-      background: #e2e8f0;
-    }
-
-    .btn-reset-stage {
-      background: #f1f5f9;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      padding: 14px 16px;
-      font-size: 0.85rem;
-    }
-
-    .btn-reset-stage:hover {
+      height: 54px;
+      background: var(--bg-main);
       color: var(--text-main);
-      background: var(--border);
+      border: 1px solid var(--border-color);
+      font-size: 1.1rem;
     }
 
-    /* Total Progress Bar */
-    .total-progress-box {
-      width: 100%;
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid var(--border);
+    .btn-nav:hover {
+      background: #E2E8F0;
     }
 
-    .total-info {
+    .secondary-controls {
       display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .total-bar-bg {
+      gap: 10px;
       width: 100%;
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 4px;
-      overflow: hidden;
+      justify-content: center;
     }
 
-    .total-bar-fill {
-      height: 100%;
-      background: var(--primary);
-      width: 0%;
-      transition: width 0.3s ease;
+    .btn-sub {
+      flex: 1;
+      height: 40px;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
     }
 
-    /* Agenda List Card */
-    .agenda-card {
+    .btn-sub:hover {
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    /* Stage List Section */
+    .stages-card {
       background: var(--card-bg);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .agenda-header {
+    .stages-header {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .agenda-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .btn-reset-fight {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-reset-fight:hover {
-      color: var(--primary);
     }
 
     .stage-list {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      max-height: 260px;
+      max-height: 380px;
       overflow-y: auto;
       padding-right: 4px;
+    }
+
+    /* Custom Scrollbar */
+    .stage-list::-webkit-scrollbar {
+      width: 6px;
+    }
+    .stage-list::-webkit-scrollbar-track {
+      background: var(--bg-main);
+      border-radius: 999px;
+    }
+    .stage-list::-webkit-scrollbar-thumb {
+      background: var(--border-focus);
+      border-radius: 999px;
     }
 
     .stage-item {
@@ -361,845 +403,85 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 12px;
-      border-radius: 10px;
-      background: var(--bg);
+      border-radius: var(--radius-sm);
       border: 1px solid transparent;
+      background: var(--bg-main);
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.15s ease;
     }
 
     .stage-item:hover {
-      border-color: var(--border);
-      background: #f1f5f9;
+      border-color: var(--border-focus);
     }
 
     .stage-item.active {
-      background: var(--primary-light);
-      border-color: var(--primary);
+      background: var(--univalle-red-soft);
+      border-color: var(--univalle-red);
     }
 
-    .stage-item.completed {
-      opacity: 0.6;
-    }
-
-    .item-left {
+    .stage-item-left {
       display: flex;
       align-items: center;
       gap: 10px;
+      overflow: hidden;
     }
 
-    .item-num {
+    .stage-num {
       font-size: 0.75rem;
       font-weight: 800;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #E2E8F0;
       color: var(--text-muted);
-      width: 20px;
-    }
-
-    .stage-item.active .item-num {
-      color: var(--primary);
-    }
-
-    .item-text {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .stage-item.active .item-text {
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    .item-time {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Scrollbar */
-    .stage-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    .stage-list::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    .stage-list::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 3px;
-    }
-
-    @media (max-width: 480px) {
-      .timer-ring-container {
-        width: 200px;
-        height: 200px;
-      }
-      .time-digits {
-        font-size: 2.8rem;
-      }
-      .stage-title {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<div class="container">
-  <!-- Header -->
-  <header>
-    <div class="header-brand">
-      <!-- Univalle Official Geometric SVG Logo -->
-      <svg class="univalle-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="#D1121C"/>
-        <!-- U geometry: White semi-oval with bottom curve -->
-        <path d="M 12 12 H 52 V 42 C 52 53 43 62 32 62 C 21 62 12 53 12 42 Z" fill="#FFFFFF"/>
-        <!-- V geometry: Inverted white triangle overlapping right side -->
-        <polygon points="32,42 90,42 61,92" fill="#FFFFFF"/>
-      </svg>
-      <div class="header-titles">
-        <h1>SEMILLERO IPT UNIVALLE</h1>
-        <p>Physics Fight • 50 Min Format</p>
-      </div>
-    </div>
-
-    <div class="top-controls">
-      <button class="icon-btn" id="sound-btn" title="Toggle Sound">
-        <span id="sound-icon">🔊</span>
-      </button>
-      <button class="icon-btn" id="fullscreen-btn" title="Fullscreen">⛶</button>
-    </div>
-  </header>
-
-  <!-- Banner for Audio unlocking -->
-  <div id="audio-banner" style="display: none;">
-    Click anywhere to enable official sound alerts
-  </div>
-
-  <!-- Main Timer Card -->
-  <div class="timer-card">
-    <div class="stage-badge" id="badge-stage">STAGE 1 / 14</div>
-    <h2 class="stage-title" id="stage-name">Preparation of all teams</h2>
-    <div class="stage-role" id="stage-role">All Teams</div>
-
-    <!-- Circular Timer -->
-    <div class="timer-ring-container">
-      <svg class="timer-ring-svg" viewBox="0 0 100 100">
-        <circle class="ring-bg" cx="50" cy="50" r="42" fill="none" />
-        <circle class="ring-progress" id="ring-path" cx="50" cy="50" r="42" fill="none" stroke-dasharray="263.89" stroke-dashoffset="0" />
-      </svg>
-      <div class="time-digits" id="time-display">05:00</div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-      <button class="btn btn-secondary" id="prev-btn" title="Previous Stage">←</button>
-      <button class="btn btn-main" id="start-btn">▶ START</button>
-      <button class="btn btn-secondary" id="next-btn" title="Next Stage">→</button>
-      <button class="btn btn-reset-stage" id="reset-stage-btn" title="Reset Stage">↺</button>
-    </div>
-
-    <!-- Total 50 Min Progress -->
-    <div class="total-progress-box">
-      <div class="total-info">
-        <span>TOTAL FIGHT PROGRESS</span>
-        <span id="total-time-text">00:00 / 50:00</span>
-      </div>
-      <div class="total-bar-bg">
-        <div class="total-bar-fill" id="total-bar"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Agenda Card -->
-  <div class="agenda-card">
-    <div class="agenda-header">
-      <span class="agenda-title">Fight Agenda (14 Stages)</span>
-      <button class="btn-reset-fight" id="reset-fight-btn">↻ Reset All</button>
-    </div>
-    <div class="stage-list" id="stage-list"></div>
-  </div>
-</div>
-
-<script>
-  // 14 STAGES - EXACTLY 3000 SECONDS (50 MIN)
-  const STAGES = [
-    { name: "Preparation of all teams", duration: 300, role: "All Teams" },
-    { name: "Presentation of the reporter", duration: 600, role: "Reporter" },
-    { name: "Clarifying questions of opponent", duration: 60, role: "Opponent → Reporter" },
-    { name: "Preparation of the opponent", duration: 120, role: "Opponent" },
-    { name: "Speech of the opponent", duration: 300, role: "Opponent" },
-    { name: "Discussion reporter – opponent", duration: 300, role: "Reporter & Opponent" },
-    { name: "Clarifying questions of reviewer", duration: 60, role: "Reviewer → Rep/Opp" },
-    { name: "Preparation of the reviewer", duration: 60, role: "Reviewer" },
-    { name: "Speech of the reviewer", duration: 180, role: "Reviewer" },
-    { name: "Discussion reporter – opponent – reviewer", duration: 180, role: "All Speakers" },
-    { name: "General discussion", duration: 300, role: "All Teams" },
-    { name: "Concluding remarks of reporter", duration: 60, role: "Reporter" },
-    { name: "Questions from the jury", duration: 300, role: "Jury → Teams" },
-    { name: "Comments of all participants", duration: 180, role: "All Participants" }
-  ];
-
-  const CIRCUMFERENCE = 2 * Math.PI * 42; // ~263.89
-
-  // State Variables
-  let currentStageIndex = 0;
-  let remainingSeconds = STAGES[0].duration;
-  let isRunning = false;
-  let timerInterval = null;
-  let targetEndTime = null;
-  let soundEnabled = true;
-
-  // Web Audio Context Setup
-  let audioCtx = null;
-  let audioUnlocked = false;
-
-  // DOM Elements
-  const stageNameEl = document.getElementById('stage-name');
-  const stageRoleEl = document.getElementById('stage-role');
-  const badgeStageEl = document.getElementById('badge-stage');
-  const timeDisplayEl = document.getElementById('time-display');
-  const ringPath = document.getElementById('ring-path');
-  const startBtn = document.getElementById('start-btn');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const resetStageBtn = document.getElementById('reset-stage-btn');
-  const resetFightBtn = document.getElementById('reset-fight-btn');
-  const stageListEl = document.getElementById('stage-list');
-  const totalTimeText = document.getElementById('total-time-text');
-  const totalBar = document.getElementById('total-bar');
-  const soundBtn = document.getElementById('sound-btn');
-  const soundIcon = document.getElementById('sound-icon');
-  const audioBanner = document.getElementById('audio-banner');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-  // Audio Synthesis
-  function initAudio() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    audioUnlocked = true;
-    audioBanner.style.display = 'none';
-  }
-
-  function playBeep(freq = 600, type = 'sine', duration = 0.2) {
-    if (!soundEnabled) return;
-    try {
-      if (!audioCtx) initAudio();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.value = freq;
-      
-      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch(e) {
-      console.log('Audio playback prevented:', e);
-    }
-  }
-
-  function triggerAlertSound(secondsLeft) {
-    if (secondsLeft === 60) {
-      // Single warning tone at 1 min
-      playBeep(700, 'sine', 0.3);
-    } else if (secondsLeft === 30) {
-      // Double warning tone at 30s
-      playBeep(850, 'sine', 0.2);
-      setTimeout(() => playBeep(850, 'sine', 0.2), 250);
-    } else if (secondsLeft === 0) {
-      // Long completion beep
-      playBeep(440, 'triangle', 0.8);
-    }
-  }
-
-  // Format MM:SS
-  function formatTime(sec) {
-    const m = Math.floor(sec / 60).toString().padStart(2, '0');
-    const s = (sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  // Calculate Cumulative Elapsed Time
-  function getElapsedTotalSeconds() {
-    let elapsed = 0;
-    for (let i = 0; i < currentStageIndex; i++) {
-      elapsed += STAGES[i].duration;
-    }
-    elapsed += (STAGES[currentStageIndex].duration - remainingSeconds);
-    return Math.min(elapsed, 3000);
-  }
-
-  // UI Render Updates
-  function updateUI() {
-    const currentStage = STAGES[currentStageIndex];
-    
-    // Text labels
-    badgeStageEl.textContent = `STAGE ${currentStageIndex + 1} / 14`;
-    stageNameEl.textContent = currentStage.name;
-    stageRoleEl.textContent = currentStage.role;
-    timeDisplayEl.textContent = formatTime(remainingSeconds);
-
-    // Stage Progress Ring Calculation
-    const fraction = remainingSeconds / currentStage.duration;
-    const offset = CIRCUMFERENCE * (1 - fraction);
-    ringPath.style.strokeDashoffset = offset;
-
-    // Ring Warning Colors
-    ringPath.classList.remove('warning', 'danger');
-    if (remainingSeconds <= 30) {
-      ringPath.classList.add('danger');
-    } else if (remainingSeconds <= 60) {
-      ringPath.classList.add('warning');
-    }
-
-    // Total Progress Calculation
-    const totalElapsed = getElapsedTotalSeconds();
-    totalTimeText.textContent = `${formatTime(totalElapsed)} / 50:00`;
-    totalBar.style.width = `${(totalElapsed / 3000) * 100}%`;
-
-    // Start/Pause Button State
-    startBtn.textContent = isRunning ? '❚❚ PAUSE' : '▶ START';
-
-    // Update List View Highlight
-    renderStageList();
-  }
-
-  function renderStageList() {
-    stageListEl.innerHTML = '';
-    STAGES.forEach((stg, idx) => {
-      const item = document.createElement('div');
-      item.className = 'stage-item';
-      if (idx === currentStageIndex) item.classList.add('active');
-      if (idx < currentStageIndex) item.classList.add('completed');
-
-      item.innerHTML = `
-        <div class="item-left">
-          <span class="item-num">${idx + 1}</span>
-          <span class="item-text">${stg.name}</span>
-        </div>
-        <span class="item-time">${formatTime(stg.duration)}</span>
-      `;
-
-      item.addEventListener('click', () => {
-        selectStage(idx);
-      });
-
-      stageListEl.appendChild(item);
-    });
-  }
-
-  // Timer Engine
-  function startTimer() {
-    if (isRunning) return;
-    initAudio();
-    isRunning = true;
-    targetEndTime = Date.now() + (remainingSeconds * 1000);
-
-    timerInterval = setInterval(() => {
-      const now = Date.now();
-      const diff = Math.round((targetEndTime - now) / 1000);
-
-      if (diff !== remainingSeconds) {
-        remainingSeconds = Math.max(0, diff);
-        triggerAlertSound(remainingSeconds);
-        
-        if (remainingSeconds <= 0) {
-          pauseTimer();
-          // Advance to next stage manually requirement
-          if (currentStageIndex < STAGES.length - 1) {
-            currentStageIndex++;
-            remainingSeconds = STAGES[currentStageIndex].duration;
-          }
-        }
-        updateUI();
-      }
-    }, 200);
-
-    updateUI();
-  }
-
-  function pauseTimer() {
-    isRunning = false;
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
-    }
-    updateUI();
-  }
-
-  function toggleTimer() {
-    if (isRunning) {
-      pauseTimer();
-    } else {
-      startTimer();
-    }
-  }
-
-  funAquí tienes el archivo completo index.html generado y listo.
-Si por alguna razón la herramienta interactiva de código no te lo desplegó en pantalla, puedes copiar directamente todo el bloque de código que se presenta a continuación, guardarlo en un bloc de notas como index.html y abrirlo en cualquier navegador (computador, tablet o celular):
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Semillero IPT Univalle - Timer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #D1121C;
-      --primary-hover: #b00e16;
-      --primary-light: #fde8e8;
-      --bg: #F8FAFC;
-      --card-bg: #FFFFFF;
-      --text-main: #0F172A;
-      --text-muted: #64748B;
-      --border: #E2E8F0;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Lexend', sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding: 12px;
-      align-items: center;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* Header */
-    header {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 14px 18px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      border: 1px solid var(--border);
-    }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .univalle-logo {
-      width: 42px;
-      height: 42px;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .header-titles h1 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--primary);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
+    .stage-item.active .stage-num {
+      background: var(--univalle-red);
+      color: #FFFFFF;
     }
 
-    .header-titles p {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .top-controls {
-      display: flex;
-      gap: 6px;
-    }
-
-    .icon-btn {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px;
-      cursor: pointer;
-      color: var(--text-main);
-      font-weight: 600;
+    .stage-name {
       font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
-    .icon-btn:hover {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .icon-btn.muted {
-      opacity: 0.5;
-    }
-
-    /* Audio Banner */
-    #audio-banner {
-      background: var(--primary-light);
-      color: var(--primary);
-      border: 1px dashed var(--primary);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    /* Timer Main Display Card */
-    .timer-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 24px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-      border: 1px solid var(--border);
-      position: relative;
-    }
-
-    .stage-badge {
-      background: var(--primary-light);
-      color: var(--primary);
-      font-size: 0.8rem;
-      font-weight: 800;
-      padding: 4px 12px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-    }
-
-    .stage-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      text-align: center;
+      font-weight: 500;
       color: var(--text-main);
-      margin-bottom: 2px;
-      line-height: 1.2;
-    }
-
-    .stage-role {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
-    /* Ring & Digits Container */
-    .timer-ring-container {
-      position: relative;
-      width: 240px;
-      height: 240px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 10px 0 20px 0;
-    }
-
-    .timer-ring-svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .ring-bg {
-      stroke: #f1f5f9;
-      stroke-width: 12;
-    }
-
-    .ring-progress {
-      stroke: var(--primary);
-      stroke-width: 12;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 0.3s linear, stroke 0.3s ease;
-    }
-
-    .ring-progress.warning {
-      stroke: #EAB308;
-    }
-
-    .ring-progress.danger {
-      stroke: #EF4444;
-    }
-
-    .time-digits {
-      position: absolute;
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: var(--text-main);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.03em;
-    }
-
-    /* Controls */
-    .action-buttons {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-      font-size: 0.95rem;
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    .btn-main {
-      background: var(--primary);
-      color: white;
-      padding: 14px 28px;
-      font-size: 1.1rem;
-      flex: 1.5;
-      max-width: 180px;
-      box-shadow: 0 4px 12px rgba(209, 18, 28, 0.25);
-    }
-
-    .btn-main:hover {
-      background: var(--primary-hover);
-    }
-
-    .btn-secondary {
-      background: var(--bg);
-      color: var(--text-main);
-      border: 1px solid var(--border);
-      padding: 14px;
-      flex: 1;
-      max-width: 60px;
-    }
-
-    .btn-secondary:hover {
-      background: #e2e8f0;
-    }
-
-    .btn-reset-stage {
-      background: #f1f5f9;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      padding: 14px 16px;
-      font-size: 0.85rem;
-    }
-
-    .btn-reset-stage:hover {
-      color: var(--text-main);
-      background: var(--border);
-    }
-
-    /* Total Progress Bar */
-    .total-progress-box {
-      width: 100%;
-      background: var(--bg);
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid var(--border);
-    }
-
-    .total-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .total-bar-bg {
-      width: 100%;
-      height: 8px;
-      background: #e2e8f0;
-      border-radius: 4px;
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .total-bar-fill {
-      height: 100%;
-      background: var(--primary);
-      width: 0%;
-      transition: width 0.3s ease;
+    .stage-item.active .stage-name {
+      font-weight: 700;
+      color: var(--univalle-red);
     }
 
-    /* Agenda List Card */
-    .agenda-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      border: 1px solid var(--border);
-    }
-
-    .agenda-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .agenda-title {
-      font-size: 0.95rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-
-    .btn-reset-fight {
-      background: none;
-      border: none;
-      color: var(--text-muted);
+    .stage-time-badge {
       font-size: 0.75rem;
       font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-reset-fight:hover {
-      color: var(--primary);
-    }
-
-    .stage-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 260px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .stage-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: var(--bg);
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-
-    .stage-item:hover {
-      border-color: var(--border);
-      background: #f1f5f9;
-    }
-
-    .stage-item.active {
-      background: var(--primary-light);
-      border-color: var(--primary);
-    }
-
-    .stage-item.completed {
-      opacity: 0.6;
-    }
-
-    .item-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .item-num {
-      font-size: 0.75rem;
-      font-weight: 800;
       color: var(--text-muted);
-      width: 20px;
+      background: #FFFFFF;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
     }
 
-    .stage-item.active .item-num {
-      color: var(--primary);
-    }
-
-    .item-text {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .stage-item.active .item-text {
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    .item-time {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Scrollbar */
-    .stage-list::-webkit-scrollbar {
-      width: 6px;
-    }
-    .stage-list::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-    .stage-list::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 3px;
-    }
-
-    @media (max-width: 480px) {
-      .timer-ring-container {
-        width: 200px;
-        height: 200px;
-      }
-      .time-digits {
-        font-size: 2.8rem;
-      }
-      .stage-title {
-        font-size: 1.1rem;
-      }
+    .stage-item.active .stage-time-badge {
+      border-color: rgba(209, 18, 28, 0.3);
+      color: var(--univalle-red);
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- Header -->
-  <header>
-    <div class="header-brand">
-      <!-- Univalle Official Geometric SVG Logo -->
+  <div class="app-container">
+    
+    <!-- Top Header with Univalle Vector Logo -->
+    <header>
       <svg class="univalle-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="100" height="100" fill="#D1121C"/>
         <!-- U geometry: White semi-oval with bottom curve -->
@@ -1207,293 +489,222 @@ Si por alguna razón la herramienta interactiva de código no te lo desplegó en
         <!-- V geometry: Inverted white triangle overlapping right side -->
         <polygon points="32,42 90,42 61,92" fill="#FFFFFF"/>
       </svg>
-      <div class="header-titles">
-        <h1>SEMILLERO IPT UNIVALLE</h1>
-        <p>Physics Fight • 50 Min Format</p>
+      <div class="header-text">
+        <h1 class="header-title">Semillero IPT Univalle</h1>
+        <p class="header-subtitle">Physics Fight Timer • 50 Min Format</p>
       </div>
-    </div>
+    </header>
 
-    <div class="top-controls">
-      <button class="icon-btn" id="sound-btn" title="Toggle Sound">
-        <span id="sound-icon">🔊</span>
+    <!-- Main Countdown Card -->
+    <main class="timer-card">
+
+      <button id="audioInitBanner" class="audio-banner" onclick="enableAudio()">
+        <span>🔊 Tap to enable audio warnings (60s, 30s, 0s)</span>
       </button>
-      <button class="icon-btn" id="fullscreen-btn" title="Fullscreen">⛶</button>
-    </div>
-  </header>
 
-  <!-- Banner for Audio unlocking -->
-  <div id="audio-banner" style="display: none;">
-    Click anywhere to enable official sound alerts
-  </div>
+      <span class="stage-badge" id="stageBadge">Stage 1 / 14</span>
+      <h2 class="stage-title" id="stageTitle">Preparation of all teams</h2>
 
-  <!-- Main Timer Card -->
-  <div class="timer-card">
-    <div class="stage-badge" id="badge-stage">STAGE 1 / 14</div>
-    <h2 class="stage-title" id="stage-name">Preparation of all teams</h2>
-    <div class="stage-role" id="stage-role">All Teams</div>
+      <!-- SVG Circular Progress Ring -->
+      <div class="timer-ring-wrapper">
+        <svg class="timer-ring-svg" viewBox="0 0 280 280">
+          <circle class="ring-bg" cx="140" cy="140" r="130"></circle>
+          <circle class="ring-progress" id="ringProgress" cx="140" cy="140" r="130"></circle>
+        </svg>
 
-    <!-- Circular Timer -->
-    <div class="timer-ring-container">
-      <svg class="timer-ring-svg" viewBox="0 0 100 100">
-        <circle class="ring-bg" cx="50" cy="50" r="42" fill="none" />
-        <circle class="ring-progress" id="ring-path" cx="50" cy="50" r="42" fill="none" stroke-dasharray="263.89" stroke-dashoffset="0" />
-      </svg>
-      <div class="time-digits" id="time-display">05:00</div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="action-buttons">
-      <button class="btn btn-secondary" id="prev-btn" title="Previous Stage">←</button>
-      <button class="btn btn-main" id="start-btn">▶ START</button>
-      <button class="btn btn-secondary" id="next-btn" title="Next Stage">→</button>
-      <button class="btn btn-reset-stage" id="reset-stage-btn" title="Reset Stage">↺</button>
-    </div>
-
-    <!-- Total 50 Min Progress -->
-    <div class="total-progress-box">
-      <div class="total-info">
-        <span>TOTAL FIGHT PROGRESS</span>
-        <span id="total-time-text">00:00 / 50:00</span>
-      </div>
-      <div class="total-bar-bg">
-        <div class="total-bar-fill" id="total-bar"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Agenda Card -->
-  <div class="agenda-card">
-    <div class="agenda-header">
-      <span class="agenda-title">Fight Agenda (14 Stages)</span>
-      <button class="btn-reset-fight" id="reset-fight-btn">↻ Reset All</button>
-    </div>
-    <div class="stage-list" id="stage-list"></div>
-  </div>
-</div>
-
-<script>
-  // 14 STAGES - EXACTLY 3000 SECONDS (50 MIN)
-  const STAGES = [
-    { name: "Preparation of all teams", duration: 300, role: "All Teams" },
-    { name: "Presentation of the reporter", duration: 600, role: "Reporter" },
-    { name: "Clarifying questions of opponent", duration: 60, role: "Opponent → Reporter" },
-    { name: "Preparation of the opponent", duration: 120, role: "Opponent" },
-    { name: "Speech of the opponent", duration: 300, role: "Opponent" },
-    { name: "Discussion reporter – opponent", duration: 300, role: "Reporter & Opponent" },
-    { name: "Clarifying questions of reviewer", duration: 60, role: "Reviewer → Rep/Opp" },
-    { name: "Preparation of the reviewer", duration: 60, role: "Reviewer" },
-    { name: "Speech of the reviewer", duration: 180, role: "Reviewer" },
-    { name: "Discussion reporter – opponent – reviewer", duration: 180, role: "All Speakers" },
-    { name: "General discussion", duration: 300, role: "All Teams" },
-    { name: "Concluding remarks of reporter", duration: 60, role: "Reporter" },
-    { name: "Questions from the jury", duration: 300, role: "Jury → Teams" },
-    { name: "Comments of all participants", duration: 180, role: "All Participants" }
-  ];
-
-  const CIRCUMFERENCE = 2 * Math.PI * 42; // ~263.89
-
-  // State Variables
-  let currentStageIndex = 0;
-  let remainingSeconds = STAGES[0].duration;
-  let isRunning = false;
-  let timerInterval = null;
-  let targetEndTime = null;
-  let soundEnabled = true;
-
-  // Web Audio Context Setup
-  let audioCtx = null;
-  let audioUnlocked = false;
-
-  // DOM Elements
-  const stageNameEl = document.getElementById('stage-name');
-  const stageRoleEl = document.getElementById('stage-role');
-  const badgeStageEl = document.getElementById('badge-stage');
-  const timeDisplayEl = document.getElementById('time-display');
-  const ringPath = document.getElementById('ring-path');
-  const startBtn = document.getElementById('start-btn');
-  const prevBtn = document.getElementById('prev-btn');
-  const nextBtn = document.getElementById('next-btn');
-  const resetStageBtn = document.getElementById('reset-stage-btn');
-  const resetFightBtn = document.getElementById('reset-fight-btn');
-  const stageListEl = document.getElementById('stage-list');
-  const totalTimeText = document.getElementById('total-time-text');
-  const totalBar = document.getElementById('total-bar');
-  const soundBtn = document.getElementById('sound-btn');
-  const soundIcon = document.getElementById('sound-icon');
-  const audioBanner = document.getElementById('audio-banner');
-  const fullscreenBtn = document.getElementById('fullscreen-btn');
-
-  // Audio Synthesis
-  function initAudio() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    audioUnlocked = true;
-    audioBanner.style.display = 'none';
-  }
-
-  function playBeep(freq = 600, type = 'sine', duration = 0.2) {
-    if (!soundEnabled) return;
-    try {
-      if (!audioCtx) initAudio();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = type;
-      osc.frequency.value = freq;
-      
-      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
-    } catch(e) {
-      console.log('Audio playback prevented:', e);
-    }
-  }
-
-  function triggerAlertSound(secondsLeft) {
-    if (secondsLeft === 60) {
-      // Single warning tone at 1 min
-      playBeep(700, 'sine', 0.3);
-    } else if (secondsLeft === 30) {
-      // Double warning tone at 30s
-      playBeep(850, 'sine', 0.2);
-      setTimeout(() => playBeep(850, 'sine', 0.2), 250);
-    } else if (secondsLeft === 0) {
-      // Long completion beep
-      playBeep(440, 'triangle', 0.8);
-    }
-  }
-
-  // Format MM:SS
-  function formatTime(sec) {
-    const m = Math.floor(sec / 60).toString().padStart(2, '0');
-    const s = (sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  // Calculate Cumulative Elapsed Time
-  function getElapsedTotalSeconds() {
-    let elapsed = 0;
-    for (let i = 0; i < currentStageIndex; i++) {
-      elapsed += STAGES[i].duration;
-    }
-    elapsed += (STAGES[currentStageIndex].duration - remainingSeconds);
-    return Math.min(elapsed, 3000);
-  }
-
-  // UI Render Updates
-  function updateUI() {
-    const currentStage = STAGES[currentStageIndex];
-    
-    // Text labels
-    badgeStageEl.textContent = `STAGE ${currentStageIndex + 1} / 14`;
-    stageNameEl.textContent = currentStage.name;
-    stageRoleEl.textContent = currentStage.role;
-    timeDisplayEl.textContent = formatTime(remainingSeconds);
-
-    // Stage Progress Ring Calculation
-    const fraction = remainingSeconds / currentStage.duration;
-    const offset = CIRCUMFERENCE * (1 - fraction);
-    ringPath.style.strokeDashoffset = offset;
-
-    // Ring Warning Colors
-    ringPath.classList.remove('warning', 'danger');
-    if (remainingSeconds <= 30) {
-      ringPath.classList.add('danger');
-    } else if (remainingSeconds <= 60) {
-      ringPath.classList.add('warning');
-    }
-
-    // Total Progress Calculation
-    const totalElapsed = getElapsedTotalSeconds();
-    totalTimeText.textContent = `${formatTime(totalElapsed)} / 50:00`;
-    totalBar.style.width = `${(totalElapsed / 3000) * 100}%`;
-
-    // Start/Pause Button State
-    startBtn.textContent = isRunning ? '❚❚ PAUSE' : '▶ START';
-
-    // Update List View Highlight
-    renderStageList();
-  }
-
-  function renderStageList() {
-    stageListEl.innerHTML = '';
-    STAGES.forEach((stg, idx) => {
-      const item = document.createElement('div');
-      item.className = 'stage-item';
-      if (idx === currentStageIndex) item.classList.add('active');
-      if (idx < currentStageIndex) item.classList.add('completed');
-
-      item.innerHTML = `
-        <div class="item-left">
-          <span class="item-num">${idx + 1}</span>
-          <span class="item-text">${stg.name}</span>
+        <!-- EXACT VERTICAL AND HORIZONTAL CENTER OVERLAY -->
+        <div class="timer-center-content">
+          <div class="countdown-digits" id="timeDisplay">05:00</div>
+          <div class="countdown-label" id="statusLabel">STAGE TIME</div>
         </div>
-        <span class="item-time">${formatTime(stg.duration)}</span>
-      `;
+      </div>
 
-      item.addEventListener('click', () => {
-        selectStage(idx);
-      });
+      <!-- 50 Minute Fight Overall Progress -->
+      <div class="overall-progress-box">
+        <div class="overall-progress-labels">
+          <span>Fight Elapsed</span>
+          <span id="overallTimeText">00:00 / 50:00</span>
+        </div>
+        <div class="overall-bar-track">
+          <div class="overall-bar-fill" id="overallBarFill"></div>
+        </div>
+      </div>
 
-      stageListEl.appendChild(item);
-    });
-  }
+      <!-- Primary & Secondary Controls -->
+      <div class="controls-grid">
+        <div class="primary-controls">
+          <button class="btn btn-nav" id="prevBtn" onclick="prevStage()" title="Previous Stage">←</button>
+          <button class="btn btn-main" id="startBtn" onclick="toggleStartPause()">▶ START</button>
+          <button class="btn btn-nav" id="nextBtn" onclick="nextStage()" title="Next Stage">→</button>
+        </div>
+        <div class="secondary-controls">
+          <button class="btn btn-sub" onclick="resetStage()">↺ Reset Stage</button>
+          <button class="btn btn-sub" onclick="resetFight()">↻ Reset Fight</button>
+        </div>
+      </div>
 
-  // Timer Engine
-  function startTimer() {
-    if (isRunning) return;
-    initAudio();
-    isRunning = true;
-    targetEndTime = Date.now() + (remainingSeconds * 1000);
+    </main>
 
-    timerInterval = setInterval(() => {
-      const now = Date.now();
-      const diff = Math.round((targetEndTime - now) / 1000);
+    <!-- Interactive Agenda Stage List -->
+    <section class="stages-card">
+      <div class="stages-header">
+        <span>Fight Agenda (14 Stages)</span>
+        <span style="font-size:0.75rem; color:var(--text-muted); font-weight:500;">50 MIN TOTAL</span>
+      </div>
+      <div class="stage-list" id="stageList"></div>
+    </section>
 
-      if (diff !== remainingSeconds) {
-        remainingSeconds = Math.max(0, diff);
-        triggerAlertSound(remainingSeconds);
-        
-        if (remainingSeconds <= 0) {
-          pauseTimer();
-          // Advance to next stage manually requirement
-          if (currentStageIndex < STAGES.length - 1) {
-            currentStageIndex++;
-            remainingSeconds = STAGES[currentStageIndex].duration;
-          }
-        }
-        updateUI();
+  </div>
+
+  <script>
+    // 14 Physics Fight Stages Structure
+    const STAGES = [
+      { id: 1, name: "Preparation of all teams", duration: 300 },
+      { id: 2, name: "Presentation of the report by the Reporter", duration: 600 },
+      { id: 3, name: "Clarifying questions from the Opponent to the Reporter", duration: 60 },
+      { id: 4, name: "Preparation of the Opponent", duration: 120 },
+      { id: 5, name: "The Opponent's speech", duration: 300 },
+      { id: 6, name: "Discussion between the Reporter and the Opponent", duration: 300 },
+      { id: 7, name: "Clarifying questions from the Reviewer to the Reporter and Opponent", duration: 60 },
+      { id: 8, name: "Preparation of the Reviewer", duration: 60 },
+      { id: 9, name: "The Reviewer's speech", duration: 180 },
+      { id: 10, name: "Discussion between the Reviewer, Reporter, and Opponent", duration: 180 },
+      { id: 11, name: "General discussion between the teams", duration: 300 },
+      { id: 12, name: "Concluding remarks by the Reporter", duration: 60 },
+      { id: 13, name: "Questions from the Jury", duration: 300 },
+      { id: 14, name: "Everyone's comments", duration: 180 }
+    ];
+
+    const TOTAL_FIGHT_DURATION = STAGES.reduce((acc, s) => acc + s.duration, 0); // 3000 sec = 50 min
+    const RING_CIRCUMFERENCE = 2 * Math.PI * 130; // ~816.8
+
+    // State Variables
+    let currentStageIndex = 0;
+    let isRunning = false;
+    let stageTimeRemaining = STAGES[0].duration;
+    let lastTimestamp = null;
+    let timerFrameId = null;
+
+    // Audio Alert Triggers state
+    let audioCtx = null;
+    let audioEnabled = false;
+    let alert60Played = false;
+    let alert30Played = false;
+    let alert0Played = false;
+
+    // DOM Elements
+    const stageBadge = document.getElementById('stageBadge');
+    const stageTitle = document.getElementById('stageTitle');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const statusLabel = document.getElementById('statusLabel');
+    const ringProgress = document.getElementById('ringProgress');
+    const overallTimeText = document.getElementById('overallTimeText');
+    const overallBarFill = document.getElementById('overallBarFill');
+    const startBtn = document.getElementById('startBtn');
+    const stageList = document.getElementById('stageList');
+    const audioInitBanner = document.getElementById('audioInitBanner');
+
+    // Web Audio Synthesizer for alerts
+    function enableAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
       }
-    }, 200);
-
-    updateUI();
-  }
-
-  function pauseTimer() {
-    isRunning = false;
-    if (timerInterval) {
-      clearInterval(timerInterval);
-      timerInterval = null;
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      audioEnabled = true;
+      audioInitBanner.style.display = 'none';
+      playTone(660, 0.15); // Confirmation beep
     }
-    updateUI();
-  }
 
-  function toggleTimer() {
-    if (isRunning) {
-      pauseTimer();
-    } else {
-      startTimer();
+    function playTone(freq, duration) {
+      if (!audioEnabled || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.error("Audio playback error", e);
+      }
     }
-  }
 
-  fun
+    function playEndAlarm() {
+      if (!audioEnabled) return;
+      playTone(880, 0.2);
+      setTimeout(() => playTone(880, 0.2), 250);
+      setTimeout(() => playTone(1174.66, 0.4), 500);
+    }
+
+    // Format seconds to mm:ss
+    function formatTime(seconds) {
+      const s = Math.max(0, Math.ceil(seconds));
+      const mins = Math.floor(s / 60);
+      const secs = s % 60;
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Calculate Total Elapsed Time across all stages up to current second
+    function calculateElapsedTotal() {
+      let elapsedPrior = 0;
+      for (let i = 0; i < currentStageIndex; i++) {
+        elapsedPrior += STAGES[i].duration;
+      }
+      const currentStageElapsed = STAGES[currentStageIndex].duration - stageTimeRemaining;
+      return elapsedPrior + currentStageElapsed;
+    }
+
+    // Main UI Render Update
+    function updateUI() {
+      const currentStage = STAGES[currentStageIndex];
+
+      // Stage Title & Badge
+      stageBadge.textContent = `STAGE ${currentStageIndex + 1} / ${STAGES.length}`;
+      stageTitle.textContent = currentStage.name;
+
+      // Stage Time Center Display
+      timeDisplay.textContent = formatTime(stageTimeRemaining);
+
+      // Circle Progress Ring calculation
+      const progressFraction = stageTimeRemaining / currentStage.duration;
+      const strokeOffset = RING_CIRCUMFERENCE * (1 - progressFraction);
+      ringProgress.style.strokeDashoffset = strokeOffset;
+
+      // Ring Color changes near end
+      if (stageTimeRemaining <= 30) {
+        ringProgress.style.stroke = '#D1121C'; // Univalle Red
+      } else if (stageTimeRemaining <= 60) {
+        ringProgress.style.stroke = '#F59E0B'; // Amber Warning
+      } else {
+        ringProgress.style.stroke = '#D1121C';
+      }
+
+      // Overall 50-min Progress Bar
+      const overallElapsed = calculateElapsedTotal();
+      overallTimeText.textContent = `${formatTime(overallElapsed)} / 50:00`;
+      const overallPercentage = Math.min(100, (overallElapsed / TOTAL_FIGHT_DURATION) * 100);
+      overallBarFill.style.width = `${overallPercentage}%`;
+
+      // Active Stage in List
+      renderStageList();
+    }
+
+    // Timekeeper Animation Loop with precise timestamp delta
+    function timerLoop(timestamp) {
+      if (!isRunning) return;
+
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = (timestamp - lastTimestamp) / 1000;
+      lastTimestamp = timestamp;
+
+      stageTimeRemaining -= delta;
+
+      // Audio Alerts checks
+      if (stageTimeRemaining 
