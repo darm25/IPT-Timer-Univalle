@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,7 +8,7 @@
     /* Google Font Import */
     @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
 
-    /* Design Tokens */
+    /* Design Tokens - Light Theme (Default) */
     :root {
       --bg-main: rgba(209, 18, 28, 0.08);
       --card-bg: #FFFFFF;
@@ -21,11 +21,25 @@
       --border-focus: #CBD5E1;
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
       --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
       --font-family: 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Dark Theme Tokens */
+    [data-theme="dark"] {
+      --bg-main: #0B0F17;            /* Azul muy oscuro / casi negro */
+      --card-bg: #151C28;          /* Tarjeta azul noche */
+      --text-main: #F1F5F9;          /* Texto blanco suave */
+      --text-muted: #94A3B8;         /* Texto secundario claro */
+      --univalle-red: #E11D2A;       /* Rojo carmesí brillante para alto contraste */
+      --univalle-red-hover: #C01521;
+      --univalle-red-soft: rgba(225, 29, 42, 0.15);
+      --border-color: #263346;       /* Bordes oscuros */
+      --border-focus: #334155;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
     }
 
     /* CSS Reset */
@@ -34,6 +48,7 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
     }
 
     body {
@@ -65,8 +80,15 @@
       padding: 16px 20px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 16px;
       box-shadow: var(--shadow-sm);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .univalle-logo {
@@ -94,6 +116,27 @@
       font-weight: 500;
       color: var(--text-muted);
       margin-top: 2px;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--univalle-red);
+      color: var(--univalle-red);
     }
 
     /* Main Timer Card */
@@ -126,11 +169,10 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: background 0.2s;
     }
 
     .audio-banner:hover {
-      background: rgba(209, 18, 28, 0.12);
+      background: rgba(209, 18, 28, 0.25);
     }
 
     /* Stage Header Info */
@@ -197,7 +239,6 @@
       stroke-linecap: round;
       stroke-dasharray: 816.8; /* 2 * PI * 130 */
       stroke-dashoffset: 0;
-      transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
     }
 
     .timer-center-content {
@@ -266,7 +307,6 @@
       height: 100%;
       width: 0%;
       background: var(--univalle-red);
-      transition: width 0.3s ease;
     }
 
     /* Control Buttons Layout */
@@ -296,7 +336,6 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.15s ease;
       user-select: none;
     }
 
@@ -327,7 +366,7 @@
     }
 
     .btn-nav:hover {
-      background: #E2E8F0;
+      border-color: var(--border-focus);
     }
 
     .secondary-controls {
@@ -385,7 +424,6 @@
       padding-right: 4px;
     }
 
-    /* Custom Scrollbar */
     .stage-list::-webkit-scrollbar {
       width: 6px;
     }
@@ -407,7 +445,6 @@
       border: 1px solid transparent;
       background: var(--bg-main);
       cursor: pointer;
-      transition: all 0.15s ease;
     }
 
     .stage-item:hover {
@@ -432,7 +469,7 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: #E2E8F0;
+      background: var(--border-color);
       color: var(--text-muted);
       display: flex;
       align-items: center;
@@ -463,7 +500,7 @@
       font-size: 0.75rem;
       font-weight: 700;
       color: var(--text-muted);
-      background: #FFFFFF;
+      background: var(--card-bg);
       padding: 2px 8px;
       border-radius: 6px;
       border: 1px solid var(--border-color);
@@ -480,19 +517,26 @@
 
   <div class="app-container">
     
-    <!-- Top Header with Univalle Vector Logo -->
+    <!-- Top Header with Univalle Vector Logo & Theme Toggle -->
     <header>
-      <svg class="univalle-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="#D1121C"/>
-        <!-- U geometry: White semi-oval with bottom curve -->
-        <path d="M 12 12 H 52 V 42 C 52 53 43 62 32 62 C 21 62 12 53 12 42 Z" fill="#FFFFFF"/>
-        <!-- V geometry: Inverted white triangle overlapping right side -->
-        <polygon points="32,42 90,42 61,92" fill="#FFFFFF"/>
-      </svg>
-      <div class="header-text">
-        <h1 class="header-title">Semillero IPT Univalle</h1>
-        <p class="header-subtitle">Physics Fight Timer • 50 Min Format</p>
+      <div class="header-left">
+        <svg class="univalle-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" fill="#D1121C"/>
+          <!-- U geometry: White semi-oval with bottom curve -->
+          <path d="M 12 12 H 52 V 42 C 52 53 43 62 32 62 C 21 62 12 53 12 42 Z" fill="#FFFFFF"/>
+          <!-- V geometry: Inverted white triangle overlapping right side -->
+          <polygon points="32,42 90,42 61,92" fill="#FFFFFF"/>
+        </svg>
+        <div class="header-text">
+          <h1 class="header-title">Semillero IPT Univalle</h1>
+          <p class="header-subtitle">Physics Fight Timer • 50 Min Format</p>
+        </div>
       </div>
+
+      <!-- Mode Toggle Button (Minimalist Sun / Moon Symbols) -->
+      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Light/Dark Mode">
+        <span id="themeIcon">☼</span>
+      </button>
     </header>
 
     <!-- Main Countdown Card -->
@@ -557,6 +601,17 @@
   </div>
 
   <script>
+    // Theme Switch Logic
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const themeIcon = document.getElementById('themeIcon');
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      htmlEl.setAttribute('data-theme', newTheme);
+      themeIcon.textContent = newTheme === 'dark' ? '☽' : '☼';
+    }
+
     // 14 Physics Fight Stages Structure
     const STAGES = [
       { id: 1, name: "Preparation of all teams", duration: 300 },
@@ -615,7 +670,7 @@
       }
       audioEnabled = true;
       audioInitBanner.style.display = 'none';
-      playTone(660, 0.15); // Confirmation beep
+      playTone(660, 0.15);
     }
 
     function playTone(freq, duration) {
@@ -679,11 +734,11 @@
 
       // Ring Color changes near end
       if (stageTimeRemaining <= 30) {
-        ringProgress.style.stroke = '#D1121C'; // Univalle Red
+        ringProgress.style.stroke = 'var(--univalle-red)';
       } else if (stageTimeRemaining <= 60) {
         ringProgress.style.stroke = '#F59E0B'; // Amber Warning
       } else {
-        ringProgress.style.stroke = '#D1121C';
+        ringProgress.style.stroke = 'var(--univalle-red)';
       }
 
       // Overall 50-min Progress Bar
